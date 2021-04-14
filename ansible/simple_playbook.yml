@@ -1,0 +1,21 @@
+## Refernce: https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html?#using-roles
+---
+- name: Provision Simple
+  hosts: all
+  gather_facts: yes ## отключаем сбор фактов
+  vars_files:
+    - vars/base.yml
+  roles:
+    - role: "Upgrade"
+
+- name: install docker + docker-compose + docker-registry2
+  hosts: all
+  become: true
+  become_method: sudo
+  become_user: root
+  gather_facts: yes ## отключаем сбор фактов
+  vars_files:
+    - vars/base.yml
+  roles:
+    - "Docker"
+    - role: "Docker-registry"

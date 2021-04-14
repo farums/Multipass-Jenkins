@@ -1,0 +1,32 @@
+#cloud-config
+hostname: "{{hostname}}"
+# Set the locale of the system
+locale: "en_US.UTF-8"
+# Set the timezone
+timezone: "Europe/Kiev"
+manage_etc_hosts: true
+
+users:
+    - default
+    - name: "{{name}}"
+      gecos: "{{gecos}}"
+      sudo: ALL=(ALL) NOPASSWD:ALL
+      groups: users, admin
+      shell: /bin/bash
+      lock_passwd: true
+      ssh_authorized_keys:
+          - "{{admin_ssh_rsa}}"
+rsyslog:
+    remotes:
+        log_serv: "*.* @_rsyslog_ip_port_"
+
+runcmd:
+    - cp /etc/netplan/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml.bak
+    - sed -i -e '13i\\            nameservers:' /etc/netplan/50-cloud-init.yaml
+    - sed -i -e '14i\\                addresses:\ [8.8.8.8, 8.8.4.4]' /etc/netplan/50-cloud-init.yaml
+    - netplan apply
+    - systemd-resolve --status | grep 'DNS Servers' -A2
+    - DEBIAN_FRONTEND=noninteractive  apt-get update -y && apt-get upgrade -y
+    - apt-get -y autoremove
+
+final_message: "The system is finally up, after $UPTIME seconds"

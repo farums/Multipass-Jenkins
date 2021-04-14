@@ -1,0 +1,6 @@
+---
+registry:
+  port: 5000
+  user: registryuser
+  pass: somepassword
+  data_directory: /var/www/docker-registry

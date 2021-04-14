@@ -1,0 +1,22 @@
+version: "3.9"
+################################################################################
+# SERVICES
+################################################################################
+services:
+  # ------------------------------------------------------------
+  # vscode
+  # ------------------------------------------------------------
+  vscode:
+    container_name: dev-container
+    build:
+      context: ./
+      dockerfile: alpine.Dockerfile
+    volumes:
+      # Git config
+      - ~/.gitconfig:/home/districter/.gitconfig
+      - ~/.gitconfig:/root/.gitconfig
+    networks:
+      - vscode-ansible
+networks:
+  vscode-ansible:
+    driver: bridge

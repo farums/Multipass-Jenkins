@@ -1,0 +1,88 @@
+// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+{
+    "name": "Ansible",
+    "dockerComposeFile": [
+        "./docker-compose.volumes.yml",
+        "./docker-compose.yml"
+    ],
+    "service": "vscode",
+    "runServices": [
+        "vscode"
+    ],
+    "shutdownAction": "stopCompose",
+    //Необязательное свойство runArgs можно использовать для указания дополнительных аргументов времени выполнения
+    "workspaceFolder": "/workspace",
+    "settings": {
+        "window.title": "Ansible",
+        // 💻 Terminal
+        "terminal.integrated.shell.linux": "/bin/bash",
+        // https://code.visualstudio.com/docs/editor/codebasics#_save-auto-save
+        "files.autoSave": "onFocusChange",
+        "files.autoSaveDelay": 1000,
+        // 🎨 Theme
+        "preview.previewTheme": "Dark",
+        "workbench.colorTheme": "Default Dark+",
+        "workbench.preferredLightColorTheme": "Default Dark+",
+        "workbench.preferredDarkColorTheme": "Default Dark+",
+        "workbench.iconTheme": "helium-icon-theme",
+        // 🎨 helgardrichard.helium-icon-theme
+        "helium-icon-theme.activeIconPack": "vue",
+        "helium-icon-theme.folders.color": "#a74054",
+        "helium-icon-theme.opacity": 1,
+        "helium-icon-theme.saturation": 0.9,
+        "helium-icon-theme.folders.associations": {
+            ".devcontainer": "Config",
+            "vars": "Config",
+            "roles": "App",
+            ".roles": "Download",
+        },
+        // ✍️ Editor
+        "editor.renderIndentGuides": false,
+        "editor.formatOnSave": true,
+        "editor.fontSize": 16,
+        "editor.tabSize": 4,
+        "editor.wordWrapColumn": 100,
+        "editor.suggest.showKeywords": false,
+        "editor.wordBasedSuggestions": false,
+        "editor.suggest.showWords": false,
+        "editor.renderWhitespace": "none",
+        "editor.someSetting": true,
+        // hancel.google-translate
+        "google-translate.firstLanguage": "ru",
+        //language
+        "locale": "ru",
+        // yaml redhat.vscode-yaml
+        "yaml.format.enable": true,
+        "yaml.validate": false,
+        "yaml.schemas": {
+            "https://json.schemastore.org/ansible-role-2.9": [
+                "**/roles/*.yml",
+                "**/defaults/**/*.yml",
+                "**/group_vars/**/*",
+                "**/host_vars/**/*",
+                "**/vars/**/*.yml",
+                "**/tasks/**/*.yml",
+                "**/handlers/*.yml",
+                "**/meta/*.yml",
+                "**/roles/**/*.yml",
+                "**/playbooks/**/*.yml",
+                "**/ansible/**/hosts"
+            ],
+            "https://json.schemastore.org/ansible-playbook.json": "**/ansible/simple_playbook.yml",
+        },
+    },
+    "extensions": [
+        "ms-ceintl.vscode-language-pack-ru",
+        "helgardrichard.helium-icon-theme",
+        "ms-ceintl.vscode-language-pack-ru",
+        "hancel.google-translate",
+        "eamodio.gitlens",
+        "editorconfig.editorconfig",
+        // ansible
+        "vscoss.vscode-ansible",
+        "wholroyd.jinja",
+        "redhat.vscode-yaml",
+        "haaaad.ansible",
+        "zbr.vscode-ansible"
+    ]
+}

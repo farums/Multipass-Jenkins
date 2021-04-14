@@ -1,0 +1,14 @@
+#https://habr.com/ru/company/ruvds/blog/441574/
+version: "3.9"
+services:
+    # ------------------------------------------------------------
+    # ansible-devcontainer
+    # -----------------------------------------------------------
+    vscode:
+        volumes:
+            - ../:/workspace:rw
+            - ../../keys:/workspace/keys:rw
+            - ../../ansible:/workspace/ansible:rw
+            - ../../config/hosts:/workspace/ansible/inventory/hosts:rw
+            - ../../../../Docs/Docs/Ci-CD/ANSIBLE:/workspace/Docs:rw
+
