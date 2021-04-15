@@ -1,14 +1,25 @@
 ---
+################################################################################
+# 👉                        docker_compose                                 👈 #
+################################################################################
 - name: Create directory docker_compose
   file:
-    path: /var/local/docker_compose/registry
+    path: /var/local/docker_compose
     state: directory
 
 - name: Copy docker-compose.yml
   copy:
     src: docker-compose.yml
-    dest: /var/local/docker_compose/registry/docker-compose.yml
-#volumes
+    dest: /var/local/docker_compose/docker-compose.yml
+################################################################################
+# 👉                    jenkins Dockerfile                                 👈 #
+################################################################################
+
+
+################################################################################
+# 👉                      nginx  volume                                    👈 #
+################################################################################
+# volume dirs
 - name: prepare volume dirs
   file:
     path: "{{ item }}"
@@ -17,20 +28,28 @@
   with_items:
     - /etc/nginx/conf.d
     - /etc/nginx/auth
-
+    
+# copy conf.d
 - name: copy configs nginx to volumes
   copy:
-    src: nginx/conf.d/default.conf
-    dest: /etc/nginx/conf.d/default.conf
+    src: "nginx/conf.d/{{ item }}.conf"
+    dest: "/etc/nginx/conf.d/{{ item }}.conf"
     mode: 0644
-
+  with_items:
+      - registry
+      #- jenkins
+      - default
+################################################################################
+# 👉                        nginx  .htpasswd                                👈 #
+################################################################################
 - name: copy configs nginx to volumes
   copy:
-    src: nginx/auth/htpasswd
+    src: nginx/auth/.htpasswd
     dest: /etc/nginx/auth
     mode: 0644
-
-#docker_compose
+################################################################################
+# 👉                    Run      docker_compose                            👈 #
+################################################################################
 - community.docker.docker_compose:
-    project_src: /var/local/docker_compose/registry/
+    project_src: /var/local/docker_compose/
     state: present

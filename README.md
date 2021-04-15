@@ -1,10 +1,13 @@
 
 ## 📘 Documentation
-
+[обновления Windows Error](https://multipass.run/docs/troubleshooting-networking-on-windows)
 [docker-login:00:37 мин](https://deworker.pro/edu/series/interactive-site/ansible-provisioning)
 [cloudinit](https://cloudinit.readthedocs.io/en/latest/topics/examples.html)
 [docker-ansible](https://github.com/cytopia/docker-ansible)
 
+
+## hosts
+C:\WINDOWS\System32\drivers\etc\hosts.ics
 # Ansible Install package
 
 Docker version 19.03.15, build 99e3ed8919

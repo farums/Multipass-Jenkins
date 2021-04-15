@@ -10,21 +10,34 @@ services:
         image: nginx:alpine
         ports:
             - "5000:5000"
-            - "5002:80"
         volumes:
             - /etc/nginx/conf.d:/etc/nginx/conf.d:rw
-            - /etc/nginx/auth/.htpasswd:/etc/nginx/auth/.htpasswd:rw
         depends_on:
             - registry
+            - jenkins
     # ------------------------------------------------------------
     #  Registry
     # ------------------------------------------------------------
     registry:
         image: registry:2
-        ports:
-            - "5001:5000"
         volumes:
             - registry:/var/lib/registry
+    # ------------------------------------------------------------
+    # jenkins
+    # ------------------------------------------------------------
+    jenkins:
+        container_name: jenkins-docker
+        build:
+            context: ./docker/jenkins
+            dockerfile: jenkins.Dockerfile
+        restart: unless-stopped
+        volumes:
+            - type: bind
+                source: /var/run/docker.sock
+                target: /var/run/docker.sock
+            - type: volume
+                source: jenkins_home
+                target: /var/jenkins_home
 # ------------------------------------------------------------
 # volumes
 # ------------------------------------------------------------

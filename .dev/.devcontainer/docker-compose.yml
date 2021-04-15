@@ -16,7 +16,7 @@ services:
       - ~/.gitconfig:/home/districter/.gitconfig
       - ~/.gitconfig:/root/.gitconfig
     networks:
-      - vscode-ansible
+      - vscode-jenkins
 networks:
-  vscode-ansible:
+  vscode-jenkins:
     driver: bridge

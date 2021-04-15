@@ -20,3 +20,5 @@ start:
 	@echo "Обновить hosts файл IP=$(multipass info "$VM_NAME" | grep IPv4 | tr --delete "\r"| awk '{print $2}')"
 	@echo "Запустить devcontainer ansible"
 	powershell.exe ./vscode-dev.ps1
+ls:
+	multipass.exe ls

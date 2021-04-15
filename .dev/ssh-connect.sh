@@ -17,6 +17,6 @@ fi
 ################################################################################
 # 👉                             Start  ansible all                        👈 #
 ################################################################################
-ansible -i /workspace/ansible/hosts -m ping all
+# export ANSIBLE_CONFIG=/workspace/ansible/ansible.cfg && ansible -m ping all
 # load playbook
 source "$SCRIPT_DIR/ansible-playbook.sh"
