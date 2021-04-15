@@ -1,0 +1,7 @@
+---
+- name: Set periodic Docker prune
+  cron:
+    name: docker-prune
+    job: "docker system prune -af --filter until=720h"
+    minute: "0"
+    hour: "1"

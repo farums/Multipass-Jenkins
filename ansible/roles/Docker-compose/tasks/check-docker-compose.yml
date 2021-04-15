@@ -1,0 +1,12 @@
+---
+- name: Checking docker-compose version
+  command: docker-compose --version
+  register: docker_compose_version
+
+- name: process docker_version.stdout var
+  set_fact:
+    docker_compose_version: "{{ docker_compose_version.stdout | regex_search('[0-9]+\\.[0-9]+\\.[0-9]+') }}"
+
+- name: debug docker-compose version
+  debug:
+    msg: "docker-compose `{{docker_compose_version}}`"

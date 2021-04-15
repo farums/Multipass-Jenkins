@@ -1,9 +1,4 @@
 ---
-#https://github.com/laincloud/lain/blob/0fe5f93d06540300c5dafb94d81b3b69d2c8f1da/playbooks/roles/bootstrap-webrouter-start/tasks/main.yaml
-- debug:
-    msg: "`{{registry.port}}`"
-# tasks file for ansible-role-docker-registry
-
 - name: Create directory docker_compose
   file:
     path: /var/local/docker_compose/registry
@@ -25,14 +20,16 @@
 
 - name: copy configs nginx to volumes
   copy:
-    src: "{{ item.src }}"
-    dest: "{ item.dest }}"
+    src: nginx/conf.d/default.conf
+    dest: /etc/nginx/conf.d/default.conf
     mode: 0644
-  with_items:
-    - src: nginx/conf.d/default.conf
-      dest: /etc/nginx/conf.d/default.conf
-    - src: nginx/auth/htpasswd
-      dest: /etc/nginx/auth/htpasswd
+
+- name: copy configs nginx to volumes
+  copy:
+    src: nginx/auth/htpasswd
+    dest: /etc/nginx/auth
+    mode: 0644
+
 #docker_compose
 - community.docker.docker_compose:
     project_src: /var/local/docker_compose/registry/

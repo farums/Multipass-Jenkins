@@ -1,0 +1,4 @@
+---
+- import_tasks: check-docker.yml
+- import_tasks: check-docker-compose.yml
+- import_tasks: Start-Docker-compose.yml

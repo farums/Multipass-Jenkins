@@ -1,0 +1,8 @@
+---
+- name: Remove useless packages
+  apt:
+    autoclean: yes
+
+- name: Remove useless dependencies
+  apt:
+    autoremove: yes
