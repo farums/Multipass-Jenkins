@@ -14,6 +14,15 @@
 ################################################################################
 # 👉                    jenkins Dockerfile                                 👈 #
 ################################################################################
+- name: Create directory jenkins_home
+  file:
+    path: /var/jenkins_home
+    state: directory
+
+- name: Copy jenkins
+  copy:
+    src: jenkins
+    dest: /var/local/docker_compose   
 
 
 ################################################################################
@@ -37,7 +46,7 @@
     mode: 0644
   with_items:
       - registry
-      #- jenkins
+      - jenkins
       - default
 ################################################################################
 # 👉                        nginx  .htpasswd                                👈 #
@@ -53,3 +62,8 @@
 - community.docker.docker_compose:
     project_src: /var/local/docker_compose/
     state: present
+  register: docker_compose_buld
+
+- name: debug docker_compose_buld
+  debug:
+      msg: "docker_compose_buld `{{docker_compose_buld}}`"

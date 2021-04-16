@@ -12,6 +12,7 @@ services:
             - "5000:5000"
         volumes:
             - /etc/nginx/conf.d:/etc/nginx/conf.d:rw
+            - /etc/nginx/auth/.htpasswd:/etc/nginx/auth/.htpasswd:rw
         depends_on:
             - registry
             - jenkins

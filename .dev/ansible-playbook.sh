@@ -10,3 +10,4 @@ ansible-playbook /workspace/ansible/simple_playbook.yml
 
 #export ANSIBLE_CONFIG=/workspace/ansible/ansible.cfg && ansible-galaxy install gbraad.docker-registry
 
+#export ANSIBLE_CONFIG=/workspace/ansible/ansible.cfg && ansible-galaxy install wurbanski.jenkins-swarm-agent
