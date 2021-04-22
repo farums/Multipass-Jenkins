@@ -22,9 +22,7 @@
 - name: Copy jenkins
   copy:
     src: jenkins
-    dest: /var/local/docker_compose   
-
-
+    dest: /var/local/docker_compose
 ################################################################################
 # 👉                      nginx  volume                                    👈 #
 ################################################################################
@@ -37,7 +35,6 @@
   with_items:
     - /etc/nginx/conf.d
     - /etc/nginx/auth
-    
 # copy conf.d
 - name: copy configs nginx to volumes
   copy:
