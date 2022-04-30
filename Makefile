@@ -1,6 +1,17 @@
-args = `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
-SELF := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
-include $(SELF)/instance.env
+#!/usr/bin/make
+Tag=1.0
+ProjectName=Multipass-Jenkins
+################################################################################
+# 👉                      ⚙️Makefile Multipass-Jenkins                     👈 #
+################################################################################
+include instance.env
+include ./Make/Settings/*.mk
+help-all: #Help: Запуск всех Help
+	@$(MAKE) help.Settings
+
+################################################################################
+# 👉                                                                       👈 #
+################################################################################
 
 init:
 	@bash $(SELF)/multipass.bash
